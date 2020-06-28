@@ -26,8 +26,8 @@
         <a href=""><img src=/media/raccoon.png class="masthead-brand" height="50px" width="80px"></a>
         <div id="nav">
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="javascript:setHomeActive()">Home</a>
-            <a class="nav-link"" href="javascript:setPrivateActive()">Private Acc</a>
+            <a id="home" class="nav-link active" href="javascript:setHomeActive()">Home</a>
+            <a id="private" class="nav-link"" href="javascript:setPrivateActive()">Private Acc</a>
             <a class="nav-link" target="_blank" href="https://teleg.run/ge6rgii">Contact</a>
           </nav>
         </div>
@@ -38,20 +38,32 @@
     <p class="lead">Without leaving any trace.</p>
     <p class="lead"></p>
   
-  <div id="form">
-  <form class="form-signin" method="post">
-  <div class="input-group mb-3">
+  <!-- input for public accs -->
+
+  <div id="formHome" class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">@</span>
     </div>
       <input type="text" class="form-control" name="username" placeholder="username" aria-label="username" aria-describedby="basic-addon1">
   </div>
+
+  <!-- input for private accs-->
+
+  <div id="formPrivate" style="display: none">
+    <div>
+      <input class="form-control" type="text" name="cookie" placeholder="SessionID Cookie">
+    </div>
+
+    <div>
+      <input class="form-control" type="text" name="username" placeholder="Username">
+    </div>
+
+    <font color="#C0C0C0" size="1.5px">*Use account's session id, which is subscribed on this user</font>
   </div>
 
   <p></p>
 
   <button class="btn btn-md btn-primary btn-block" type="submit">Check</button>
-</form>
 
 <div id="posts">
     <p></p>
