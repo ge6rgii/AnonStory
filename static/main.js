@@ -1,4 +1,4 @@
-// alerts HTML
+// alerts class name
 var divClass = "alert alert-warning alert-dismissible fade show";
 
 function parseResponse(pics, videos) {
@@ -16,14 +16,17 @@ function getStoriesLinks(username) {
 fetch(`http://127.0.0.1/api/${username}`).then(function(response) {
   response.text().then(function(text) {
     var response = text;
-    if (response == 'There aren\'t any posts or account is private') {
+    if (response == 'Wrong username') {
       document.getElementById('posts').innerHTML = `<div class="${divClass}"><strong>${username}</strong> user doesn't exist</div>`;
-    } else if (response == 'Wrong username') {
+      document.body.style.height = '100%';
+    } else if (response == 'There aren\'t any stories') {
       document.getElementById('posts').innerHTML = `<div class="${divClass}"><strong>Ooops!</strong> It seems like there aren't any stories or this account is <a href="javascript:setPrivateActive()" color="black"><font color="#86592d" style="text-decoration: underline;">private</font></a></div>`;
+      document.body.style.height = '100%';
     } else {
       var pics = JSON.parse(response)['pics'];
       var videos = JSON.parse(response)['videos'];
       var responseParsed = parseResponse(pics, videos);
+      document.body.style.height = 'auto';
       document.getElementById('posts').innerHTML = responseParsed;
     }
   });
@@ -31,6 +34,7 @@ fetch(`http://127.0.0.1/api/${username}`).then(function(response) {
 }
 
 function setPrivateActive() {
+  document.body.style.height = '100%';
   document.getElementById('posts').innerHTML = '';
   document.getElementById('home').classList.remove('active');
   document.getElementById('private').classList.add('active');
@@ -39,6 +43,7 @@ function setPrivateActive() {
 }
 
 function setHomeActive() {
+  document.body.style.height = '100%';
   document.getElementById('posts').innerHTML = '';
   document.getElementById('home').classList.add('active');
   document.getElementById('private').classList.remove('active');
