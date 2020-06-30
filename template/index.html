@@ -44,7 +44,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">@</span>
     </div>
-      <input type="text" class="form-control" name="username" placeholder="username" aria-label="username" aria-describedby="basic-addon1">
+      <input type="text" class="form-control" name="username" id="username" placeholder="username" aria-label="username" aria-describedby="basic-addon1">
   </div>
 
   <!-- input for private accs-->
@@ -63,11 +63,11 @@
 
   <p></p>
 
-  <button class="btn btn-md btn-primary btn-block" type="submit">Check</button>
+  <button class="btn btn-md btn-primary btn-block" onclick="getStoriesLinks(document.getElementById('username').value)" type="submit">Check</button>
 
-<div id="posts">
-    <p></p>
-</div>
+<p></p>
+
+<div id="posts"></div>
 
   </main>
   <hr class="featurette-divider">
