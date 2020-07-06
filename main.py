@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import requests
 import json
 
@@ -49,17 +49,33 @@ def parse_instagram_response(response):
     result = {'pics': pics, 'videos': videos}
     return result
 
-
-@app.route('/api/<username>', methods=['GET'])
-def main(username):
+def get_stories_links(username, sessionid=data):
     user_id = get_user_id(username)
     if user_id == "Wrong username":
         return user_id
-    response = reverse_instagram(user_id)
+    response = reverse_instagram(user_id, sessionid)
     stories = parse_instagram_response(response)
     if stories == "There aren't any stories":
         return stories
     return jsonify(stories)
+
+
+@app.route('/api/public/<username>', methods=['GET'])
+def get_stories_public(username):
+    stories_links = get_stories_links(username)
+    return stories_links
+
+
+@app.route('/api/private', methods=['POST'])
+def get_stories_private():
+    data = json.loads(request.data)
+    try:
+        sessionid = {"sessionid": data["sessionid"]}
+        username = data["username"]
+        stories_links = get_stories_links(username, sessionid)
+    except KeyError:
+        return 'Plase fill out the form'
+    return stories_links
 
 
 if __name__ == '__main__':
