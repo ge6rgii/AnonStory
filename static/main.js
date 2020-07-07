@@ -1,5 +1,6 @@
 // alerts class name
 var divClass = "alert alert-warning alert-dismissible fade show";
+var noStories = `<div class="${divClass}"><strong>Ooops!</strong> It seems like there aren't any stories or this account is <a href="javascript:setPrivateActive()" color="black"><font color="#86592d" style="text-decoration: underline;">private</font></a></div>`;
 
 function parseResponse(pics, videos) {
 var result = ``;
@@ -12,15 +13,15 @@ var result = ``;
   return result;
 }
 
-function getStoriesLinks(username) {
-fetch(`http://127.0.0.1/api/${username}`).then(function(response) {
+function getStoriesLinks(requestType, username) {
+fetch(`http://127.0.0.1/api/${requestType}/${username}`).then(function(response) {
   response.text().then(function(text) {
     var response = text;
     if (response == 'Wrong username') {
       document.getElementById('posts').innerHTML = `<div class="${divClass}"><strong>${username}</strong> user doesn't exist</div>`;
       document.body.style.height = '100%';
     } else if (response == 'There aren\'t any stories') {
-      document.getElementById('posts').innerHTML = `<div class="${divClass}"><strong>Ooops!</strong> It seems like there aren't any stories or this account is <a href="javascript:setPrivateActive()" color="black"><font color="#86592d" style="text-decoration: underline;">private</font></a></div>`;
+      document.getElementById('posts').innerHTML = noStories;
       document.body.style.height = '100%';
     } else {
       var pics = JSON.parse(response)['pics'];
