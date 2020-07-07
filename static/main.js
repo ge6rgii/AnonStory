@@ -3,7 +3,6 @@ var divClass = "alert alert-warning alert-dismissible fade show";
 var noStories = `<div class="${divClass}"><strong>Ooops!</strong> It seems like there aren't any stories or this account is <a href="javascript:setPrivateActive()" color="black"><font color="#86592d" style="text-decoration: underline;">private</font></a></div>`;
 var noStoriesPrivate = `<div class="${divClass}"><strong>Ooops!</strong> It seems like there aren't any stories or session ID is invalid</div>`;
 
-
 function prepareContentBlock(pics, videos) {
 var result = ``;
   for (var i in pics) {
@@ -21,11 +20,12 @@ function getLinks(response, username) {
     document.getElementById('posts').innerHTML = `<div class="${divClass}"><strong>${username}</strong> user doesn't exist</div>`;
     document.body.style.height = '100%';
   } else {
+    let usernameLink = `<div><strong><a href="https://instagram.com/${username}">${username}</a></strong> stories:</div>`;
     let pics = JSON.parse(response)['pics'];
     let videos = JSON.parse(response)['videos'];
     let contentBlock = prepareContentBlock(pics, videos);
     document.body.style.height = 'auto';
-    document.getElementById('posts').innerHTML = contentBlock;
+    document.getElementById('posts').innerHTML = usernameLink + contentBlock;
   }
 }
 
@@ -43,6 +43,7 @@ fetch(`http://127.0.0.1/api/public/${username}`).then(function(response) {
   });
 });
 }
+
 
 function getStoriesPrivate(username, sessionid) {
   const data = {"username": username, "sessionid": sessionid};
