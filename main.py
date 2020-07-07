@@ -70,8 +70,8 @@ def get_stories_public(username):
 def get_stories_private():
     data = json.loads(request.data)
     try:
-        sessionid = {"sessionid": data["sessionid"]}
-        username = data["username"]
+        sessionid = {"sessionid": str(data["sessionid"])}
+        username = str(data["username"])
         stories_links = get_stories_links(username, sessionid)
     except KeyError:
         return 'Plase fill out the form'
