@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
   <head>
-
-  <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+  <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -39,35 +37,32 @@
     <p class="lead"></p>
   
   <!-- input for public accs -->
-
-  <div id="formHome" class="input-group mb-3">
+  <div id="formHome">
+  <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="basic-addon1">@</span>
     </div>
-      <input type="text" class="form-control" name="username" id="username" placeholder="username" aria-label="username" aria-describedby="basic-addon1">
+    <input class="form-control" id="username" type="text" name="username" placeholder="Username">
   </div>
-
+  <p></p>
+  <button class="btn btn-md btn-primary btn-block" onclick="getStoriesLinks('public', document.getElementById('username').value)" type="submit">Check</button>
+  </div>
   <!-- input for private accs-->
 
   <div id="formPrivate" style="display: none">
     <div>
       <input class="form-control" type="text" name="cookie" placeholder="SessionID Cookie">
     </div>
-
     <div>
       <input class="form-control" type="text" name="username" placeholder="Username">
     </div>
-
     <font color="#C0C0C0" size="1.5px">*Use account's session id, which is subscribed on this user</font>
+    <p></p>
+    <button class="btn btn-md btn-primary btn-block" onclick="getStoriesLinks('private', document.getElementById('username').value)" type="submit">Check</button>
   </div>
-
   <p></p>
 
-  <button class="btn btn-md btn-primary btn-block" onclick="getStoriesLinks(document.getElementById('username').value)" type="submit">Check</button>
-
-<p></p>
-
-<div id="posts"></div>
+  <div id="posts"></div>
 
   </main>
   <hr class="featurette-divider">
