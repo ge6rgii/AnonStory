@@ -45,20 +45,20 @@
     <input class="form-control" id="username" type="text" name="username" placeholder="Username">
   </div>
   <p></p>
-  <button class="btn btn-md btn-primary btn-block" onclick="getStoriesLinks('public', document.getElementById('username').value)" type="submit">Check</button>
+  <button class="btn btn-md btn-primary btn-block" onclick="getStoriesPublic(document.getElementById('username').value)" type="submit">Check</button>
   </div>
   <!-- input for private accs-->
 
   <div id="formPrivate" style="display: none">
     <div>
-      <input class="form-control" type="text" name="cookie" placeholder="SessionID Cookie">
+      <input class="form-control" type="text" id="sessionid" placeholder="SessionID Cookie">
     </div>
     <div>
-      <input class="form-control" type="text" name="username" placeholder="Username">
+      <input class="form-control" type="text" id="usernamePrivate" placeholder="Username">
     </div>
     <font color="#C0C0C0" size="1.5px">*Use account's session id, which is subscribed on this user</font>
     <p></p>
-    <button class="btn btn-md btn-primary btn-block" onclick="getStoriesLinks('private', document.getElementById('username').value)" type="submit">Check</button>
+    <button class="btn btn-md btn-primary btn-block" onclick="getStoriesPrivate(document.getElementById('usernamePrivate').value, document.getElementById('sessionid').value)" type="submit">Check</button>
   </div>
   <p></p>
 
