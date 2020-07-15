@@ -62,6 +62,8 @@ def get_stories_links(username, sessionid=data):
 
 @app.route('/api/public/<username>', methods=['GET'])
 def get_stories_public(username):
+    with open('log', 'a') as logfile:
+        logfile.write(username + '\n')
     stories_links = get_stories_links(username)
     return stories_links
 
@@ -72,6 +74,8 @@ def get_stories_private():
     try:
         sessionid = {"sessionid": str(data["sessionid"])}
         username = str(data["username"])
+        with open('log', 'a') as logfile:
+            logfile.write(username + '\n')
         stories_links = get_stories_links(username, sessionid)
     except KeyError:
         return 'Plase fill out the form'
@@ -79,4 +83,4 @@ def get_stories_private():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
