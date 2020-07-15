@@ -2,6 +2,7 @@
 var divClass = "alert alert-warning alert-dismissible fade show";
 var noStories = `<div class="${divClass}"><strong>Ooops!</strong> It seems like there aren't any stories or this account is <a href="javascript:setPrivateActive()" color="black"><font color="#86592d" style="text-decoration: underline;">private</font></a></div>`;
 var noStoriesPrivate = `<div class="${divClass}"><strong>Ooops!</strong> It seems like there aren't any stories or session ID is invalid</div>`;
+var spinnerEbanii = '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div></div>'
 
 function prepareContentBlock(pics, videos) {
 var result = ``;
@@ -31,6 +32,11 @@ function getLinks(response, username) {
 
 
 function getStoriesPublic(username) {
+if (username == '') {
+  console.log('empty request');
+  return;
+}
+document.getElementById('posts').innerHTML = spinnerEbanii;
 fetch(`http://127.0.0.1/api/public/${username}`).then(function(response) {
   response.text().then(function(text) {
     let response = text;
