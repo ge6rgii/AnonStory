@@ -7,13 +7,17 @@ with open('secretkey.json', 'r') as file:
     data = json.load(file)['sessionid']
     data = {'sessionid': data}
 
+# IG server can response differently without user agent info (it breakes everything sometimes heh).
+user_agent = {"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu "
+                            "Chromium/79.0.3945.79 Chrome/79.0.3945.79 Safari/537.36"}
 
 app = Flask(__name__)
 
 
 def get_user_id(username):
-    url = 'https://instagram.com/{}'.format(username)
-    r = requests.get(url).text
+    print(username)
+    url = f'http://instagram.com/{username}'
+    r = requests.get(url, headers=user_agent, cookies=data).text
     try:
         result = r.split('profilePage_')[1]
         user_id = result.split('"')[0]
