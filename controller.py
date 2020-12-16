@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request
+from model import InstaClient
+from config import SESSION, USER_AGENT
 
 
 app = Flask(__name__)
-
+insta_client = InstaClient(SESSION, USER_AGENT)
 
 @app.route('/api/public/<username>', methods=['GET'])
 def get_stories_public(username):
