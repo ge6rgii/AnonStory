@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask
 from model import InstaClient
 from config import SESSIONID, USER_AGENT
 
