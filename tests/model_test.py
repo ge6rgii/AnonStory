@@ -22,6 +22,6 @@ def test_get_user_id(username, expected):
     ('definitely_wrong_username', 'Wrong username'),
     ('goshashreds', 'There aren\'t any stories'),
 ])
-def test_err_raw_account_data(username, expected):
+def test_err_get_stories_links(username, expected):
     resp = instaclient.get_stories_links(username)
     assert resp == expected
