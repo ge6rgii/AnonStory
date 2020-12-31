@@ -1,4 +1,5 @@
 import requests
+from typing import Union
 
 
 class InstaClient:
@@ -23,18 +24,20 @@ class InstaClient:
         user_id = self._get_user_id(username)
         if not user_id:
             return {}
+
         url = f'{self.url}/graphql/query/?query_hash=ba71ba2fcb5655e7e2f37b05aec0ff98&variables=%7B' \
               f'%22reel_ids%22%3A%5B%22{user_id}%22%5D%2C%22tag_names%22%3A%5B%5D%2C%22location_ids%22%3A%5B%5D%2C' \
                '%22highlight_reel_ids%22%3A%5B%5D%2C%22precomposed_overlay%22%3Afalse%2C%22show_story_viewer_list%22' \
                '%3Atrue%2C%22story_viewer_fetch_count%22%3A50%2C%22story_viewer_cursor%22%3A%22%22%2C' \
                '%22stories_video_dash_manifest%22%3Afalse%7D'
         raw_account_data = requests.get(url, headers=self.user_agent, cookies=sessionid).json()
+        
         return raw_account_data
 
-    def get_stories_links(self, username, sessionid=None):
+    def get_stories_links(self, username: str, sessionid=None) -> Union[dict, str]:
         if not sessionid:
             sessionid = self.sessionid
-            
+
         raw_account_data = self._get_raw_account_data(username, sessionid)
         if not raw_account_data:
             return 'Wrong username'
