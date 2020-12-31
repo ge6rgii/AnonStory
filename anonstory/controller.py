@@ -16,8 +16,6 @@ def get_stories_public(username):
 
 @app.route('/api/private', methods=['POST'])
 def get_stories_private():
-    print("**********")
-    print(request.data)
     data = json.loads(request.data)
     try:
         sessionid = {"sessionid": str(data["sessionid"])}
