@@ -5,7 +5,7 @@ from anonstory.model import InstaClient
 from anonstory.config import SESSIONID, USER_AGENT
 
 
-instaclient = InstaClient(sessionid, user_agent)
+instaclient = InstaClient(SESSIONID, USER_AGENT)
 
 
 @pytest.mark.parametrize('username, expected', [
@@ -16,3 +16,12 @@ instaclient = InstaClient(sessionid, user_agent)
 def test_get_user_id(username, expected):
     user_id = instaclient._get_user_id(username)
     assert user_id == expected
+
+
+@pytest.mark.parametrize('username, expected', [
+    ('definitely_wrong_username', 'Wrong username'),
+    ('goshashreds', 'There aren\'t any stories'),
+])
+def test_err_raw_account_data(username, expected):
+    resp = instaclient.get_stories_links(username)
+    assert resp == expected
