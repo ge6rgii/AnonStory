@@ -1,15 +1,16 @@
 from flask import Flask, jsonify, request
 from model import InstaClient
-from config import SESSION, USER_AGENT
+from config import SESSIONID, USER_AGENT
 
 
 app = Flask(__name__)
-insta_client = InstaClient(SESSION, USER_AGENT)
+instaclient = InstaClient(SESSIONID, USER_AGENT)
 
 
 @app.route('/api/public/<username>', methods=['GET'])
 def get_stories_public(username):
-    pass
+    stories_links = instaclient.get_stories_links(username)
+    return stories_links
 
 
 @app.route('/api/private', methods=['POST'])
