@@ -1,4 +1,5 @@
 # Check Instagram stories without leaving any trace.
+### P.S. The service is temporarily unavailable for some reasons.
 
 Just a little pet project using Flask/a pinch of JS.
 
